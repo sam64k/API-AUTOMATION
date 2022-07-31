@@ -121,12 +121,20 @@ public class HTTPRequestBuilder extends ScenarioContext {
 	@Then("user performs HTTP {string} request on InventorySummey API")
 	public void user_performs_http_request_on_inventory_summey_api(String string) {
 	    // Write code here that turns the phrase above into concrete actions
-//		String us="ivstvgtest";
-//		String pw="3Kk6nphN";
 	    Response resp = HTTPMethod.httpPost(scenarioContext.getHeaderParams(), 
 	    		scenarioContext.getPayload(), scenarioContext.getURI(),
 	    		scenarioContext.getUsername(),scenarioContext.getPassword());
 	    scenarioContext.setResponse(resp);
+	}
+
+	@Then("user performs HTTP POST request on oblpn-getLabel API")
+	public void user_performs_http_post_request_on_oblpn_get_label_api() {
+		// Write code here that turns the phrase above into concrete actions
+		Response response = HTTPMethod.httpPost(scenarioContext.getHeaderParams(),
+				scenarioContext.getPayload(),scenarioContext.getURI(),
+				scenarioContext.getUsername(),scenarioContext.getPassword());
+
+		scenarioContext.setResponse(response);
 	}
 	
 	@Then("read payload from file {string}")

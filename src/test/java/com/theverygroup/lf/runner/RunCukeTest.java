@@ -1,14 +1,32 @@
-//package com.theverygroup.lf.runner;
-//
-//import io.cucumber.junit.Cucumber;
-//import io.cucumber.junit.CucumberOptions;
-//import org.junit.runner.RunWith;
-//
-//@RunWith(Cucumber.class)
-//@CucumberOptions(
-//        plugin = {"pretty", "html:target/cucumber-report.html"},
-//        features = {"Features/"}
-//)
-//public class RunCukeTest {
-//
-//}
+package com.theverygroup.lf.runner;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		features = {"src/test/features"},
+		monochrome = true,
+		dryRun = false,
+		tags = "@getlabel",
+		glue = "com.theverygroup.lf",
+		plugin = { "pretty","html:target/Execution-Report.html",
+					"json:target/Execution-Report.json"	}
+		)
+public class RunCukeTest {
+	
+	@BeforeClass
+	public static void Setup() {
+		System.out.println("In Test Runner-setup");
+	}
+	
+	@AfterClass
+	public static void teardown() {
+		System.out.println("In Test Runner-teardown");
+	}
+	
+}

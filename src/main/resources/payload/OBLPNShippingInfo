@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LgfData xsi:noNamespaceSchemaLocation="schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Header>
+        <DocumentVersion>string</DocumentVersion>
+        <OriginSystem>string</OriginSystem>
+        <ClientEnvCode>string</ClientEnvCode>
+        <ParentCompanyCode>string</ParentCompanyCode>
+        <Entity>oblpn_shipping_info</Entity>
+        <TimeStamp>1986-02-28T09:15:55.98</TimeStamp>
+        <MessageId>string</MessageId>
+    </Header>
+    <ListOfOBLPNShippingInfo>
+        <oblpn_shipping_info>
+            <oblpnheader>
+                <facility_code>${facility_code:-003}</facility_code>
+                <oblpn>${oblpn:-OBLPN0000008001}</oblpn>
+            </oblpnheader>
+            <oblpndetail>
+                <order_nbr>${order_nbr:-2019011710}</order_nbr>
+                <order_seq_nbr>${order_seq_nbr:-2019011710}</order_seq_nbr>
+                <order_dtl_cust_short_text_2>${order_dtl_cust_short_text_2:-1000005}</order_dtl_cust_short_text_2>
+            </oblpndetail>
+        </oblpn_shipping_info>
+    </ListOfOBLPNShippingInfo>
+</LgfData>
