@@ -1,0 +1,16 @@
+[
+    {
+        "bookingReference": "${bookingReference:-03051101}",
+        "typeCode": "${typeCode:-PRET}",
+        "supplierCode": "${supplierCode:-M354}",
+        "facilityCode": ${facilityCode:-3},
+        "deliveryDate": "${deliveryDate:-2022-05-18}",
+        "itemDetail": [
+            {
+                "sku": "${sku:-PN9XW}",
+                "quantity": ${quantity:-30},
+                "purchaseOrderId": "${purchaseOrderId:-69652701}"
+            }
+        ]
+    }
+]

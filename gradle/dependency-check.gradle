@@ -1,0 +1,13 @@
+apply plugin: 'org.owasp.dependencycheck'
+
+dependencyCheck {
+    autoUpdate = "${updateNvdDb}"
+    cveValidForHours = 12
+    formats = ['HTML', 'XML']
+    failBuildOnCVSS = 1
+    failOnError = true
+    outputDirectory = 'build/reports/dependency-check'
+    skipTestGroups = true
+    suppressionFile = 'config/dependency-suppression.xml'
+    analyzers.assemblyEnabled = false
+}

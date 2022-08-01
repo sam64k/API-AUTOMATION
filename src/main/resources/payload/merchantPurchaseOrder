@@ -1,0 +1,13 @@
+{
+    "contractNumber": ${contractNumber:-696509},
+    "callNumber": ${callNumber:-1},
+    "supplierCode": "${supplierCode:-A054}",
+    "facilityCode": ${facilityCode:-3},
+    "deliveryDate": "${deliveryDate:-2025-04-25}",
+    "itemDetail": [
+        {
+            "sku": "${sku:-N7MAX}",
+            "quantity": ${quantity:-10}
+        }
+    ]
+}

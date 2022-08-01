@@ -1,0 +1,83 @@
+apply plugin: 'com.github.ben-manes.versions'
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA', 'JRE'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+def dependencyTable = { html, dependencies ->
+    if (dependencies.isEmpty()) {
+        html.p("No dependencies have newer versions available.")
+    } else {
+        html.table {
+            thead {
+                tr {
+                    th("Group")
+                    th("Module")
+                    th("Current version")
+                    th("Latest version")
+                }
+            }
+            tbody {
+                dependencies.each { dependency ->
+                    tr {
+                        td(dependency.group)
+                        td(dependency.name)
+                        td(dependency.version)
+                        td(dependency.available.release ?: dependency.available.milestone)
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencyUpdates {
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
+    outputFormatter = { result ->
+        def updatable = result.outdated.dependencies
+        if (!updatable.isEmpty()) {
+            def tvgDependencies = updatable.findAll { dependency -> dependency.group.contains('com.theverygroup') }
+            def otherDependencies = updatable.findAll { dependency -> !dependency.group.contains('com.theverygroup') }
+
+            new File("${buildDir}/reports/dependency-updates").mkdirs()
+            new File("${buildDir}/reports/dependency-updates/report.html").withWriter('utf-8') { writer ->
+                def html = new groovy.xml.MarkupBuilder(writer)
+
+                html.html {
+                    head {
+                        style(nonce: "ZGVwZW5kZW5jeSB1cGRhdGUgcmVwb3J0", type:"text/css", '''
+                            body {
+                                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+                                font-size: 1.3rem;
+                            }
+                            table {
+                                border-collapse: collapse;
+                            }
+                            th {
+                                background-color: #4CAF50;
+                                color: white;
+                                text-align: left;
+                            }
+                            th, td {
+                                padding: 15px 25px;
+                            }
+                            tr:nth-child(even) {
+                                background-color: #f2f2f2;
+                            }
+                        ''')
+                    }
+                    body {
+                        h1("Dependencies with newer versions available")
+                        h3("TVG dependencies")
+                        dependencyTable(html, tvgDependencies)
+                        h3("Other dependencies")
+                        dependencyTable(html, otherDependencies)
+                    }
+                }
+            }
+        }
+    }
+}

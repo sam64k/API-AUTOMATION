@@ -1,0 +1,12 @@
+*.log
+*.tmp
+*.prefs
+/.settings
+/.settings/
+/.classpath
+/target/classes
+/target/test-classes
+.idea
+build/
+target/
+.gradle
