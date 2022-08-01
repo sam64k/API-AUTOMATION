@@ -5,43 +5,43 @@ group 'very.fullfilment'
 version '1.0-SNAPSHOT'
 
 
-apply plugin: 'maven-publish'
-apply plugin: 'maven'
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    archiveClassifier = 'sources'
-}
-tasks.withType(PublishToMavenRepository) {
-    doFirst {
-        if ("${version}" == "unspecified") {
-            throw new GradleException("Version not specified. Provide a version via -Pversion='you.version'.")
-        }
-    }
-}
-
-publishing {
-    publications {
-        library(MavenPublication) {
-            from components.java
-            groupId "${group}"
-            artifactId "lf-api-cuke-test"
-            version "${version}"
-            artifact sourcesJar
-        }
-    }
-    repositories {
-    mavenCentral()
-        maven {
-            url repoUrl
-            credentials {
-                username repoUsername
-                password repoPassword
-            }
-        }
-        mavenLocal()
-    }
-}
+//apply plugin: 'maven-publish'
+//apply plugin: 'maven'
+//
+//task sourcesJar(type: Jar) {
+//    from sourceSets.main.allJava
+//    archiveClassifier = 'sources'
+//}
+//tasks.withType(PublishToMavenRepository) {
+//    doFirst {
+//        if ("${version}" == "unspecified") {
+//            throw new GradleException("Version not specified. Provide a version via -Pversion='you.version'.")
+//        }
+//    }
+//}
+//
+//publishing {
+//    publications {
+//        library(MavenPublication) {
+//            from components.java
+//            groupId "${group}"
+//            artifactId "lf-api-cuke-test"
+//            version "${version}"
+//            artifact sourcesJar
+//        }
+//    }
+//    repositories {
+//    mavenCentral()
+//        maven {
+//            url repoUrl
+//            credentials {
+//                username repoUsername
+//                password repoPassword
+//            }
+//        }
+//        mavenLocal()
+//    }
+//}
 
 dependencies {
     //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -80,3 +80,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+apply from: 'gradle/dependency-check.gradle'
+//apply from: 'gradle/utils.gradle'
+apply from: 'gradle/dependency-updates.gradle'
+apply from: 'gradle/publish.gradle'
