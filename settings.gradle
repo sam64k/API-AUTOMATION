@@ -1,2 +1,9 @@
-rootProject.name = 'lf-api-cuke-test'
-
+pluginManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    
+}
+rootProject.name='lf-api-cuke-test'
