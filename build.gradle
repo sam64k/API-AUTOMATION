@@ -10,8 +10,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'very.fullfilment'
-version '1.0-SNAPSHOT'
+group 'com.theverygroup.fulfilment'
 
 repositories {
     maven {
