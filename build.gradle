@@ -31,7 +31,7 @@ publishing {
         }
     }
     repositories {
-//    mavenCentral()
+    mavenCentral()
         maven {
             url repoUrl
             credentials {
