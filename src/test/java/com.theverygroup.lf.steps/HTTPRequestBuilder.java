@@ -136,7 +136,16 @@ public class HTTPRequestBuilder extends ScenarioContext {
 
 		scenarioContext.setResponse(response);
 	}
-	
+	@Then("user performs HTTP POST request with basic auth")
+	public void user_performs_http_post_request_with_basic_auth() {
+		// Write code here that turns the phrase above into concrete actions
+		Response response = HTTPMethod.httpPost(scenarioContext.getHeaderParams(),
+				scenarioContext.getPayload(),scenarioContext.getURI(),
+				scenarioContext.getUsername(),scenarioContext.getPassword());
+
+		scenarioContext.setResponse(response);
+	}
+
 	@Then("read payload from file {string}")
 	public void read_payload_from_file(String filename) throws IOException, URISyntaxException {
 	    // Write code here that turns the phrase above into concrete actions

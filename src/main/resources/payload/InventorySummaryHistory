@@ -1,0 +1,118 @@
+<LgfData>
+    <Header>
+        <DocumentVersion>22C</DocumentVersion>
+        <OriginSystem>LogFire</OriginSystem>
+        <ClientEnvCode>theverygroup_test</ClientEnvCode>
+        <ParentCompanyCode>*</ParentCompanyCode>
+        <Entity>inventory_history</Entity>
+        <TimeStamp>2022-08-11T16:07:44</TimeStamp>
+    </Header>
+    <ListOfInventoryHistories>
+        <inventory_history>
+            <group_nbr>${group_nbr:-111222333}</group_nbr>
+            <seq_nbr>${seq_nbr:-1111}</seq_nbr>
+            <facility_code>${facility_code}</facility_code>
+            <company_code>THEVERYGROUP</company_code>
+            <activity_code>${activity_code}</activity_code>
+            <shipment_type>${shipment_type}</shipment_type>
+            <lock_code>${lock_code}</lock_code>
+            <reason_code>${reason_code}</reason_code>
+            <lpn_nbr />
+            <po_nbr>${po_nbr}</po_nbr>
+            <shipment_nbr>${shipment_nbr}</shipment_nbr>
+            <location>1-51-01-026</location>
+            <orig_qty>${orig_qty}</orig_qty>
+            <adj_qty>${adj_qty}</adj_qty>
+            <item_code>${item_code}</item_code>
+            <item_alternate_code>${item_code}</item_alternate_code>
+            <item_part_a>${item_code}</item_part_a>
+            <ref_code_1>${ref_code_1}</ref_code_1>
+            <ref_value_1>${ref_value_1}</ref_value_1>
+            <ref_code_2>${ref_code_2}</ref_code_2>
+            <ref_value_2>${ref_value_2}</ref_value_2>
+            <item_part_b />
+            <item_part_c />
+            <item_part_d />
+            <item_part_e />
+            <item_part_f />
+            <item_description>Atlantic Gloss Corner TV Unit with LED L</item_description>
+            <trailer_nbr />
+            <po_line_nbr>0</po_line_nbr>
+            <vendor_code />
+            <order_nbr />
+            <order_seq_nbr>0</order_seq_nbr>
+            <to_facility_code />
+            <lpns_shipped />
+            <units_shipped>0</units_shipped>
+            <lpns_received />
+            <units_received>0</units_received>
+            <ref_code_3>FCN</ref_code_3>
+            <ref_value_3>Wrexham 2 Man</ref_value_3>
+            <ref_code_4 />
+            <ref_value_4 />
+            <ref_code_5 />
+            <ref_value_5 />
+            <create_date>20220811000000</create_date>
+            <invn_attr_a />
+            <invn_attr_b />
+            <invn_attr_c />
+            <shipment_line_nbr>0</shipment_line_nbr>
+            <serial_nbr />
+            <invn_attr_d />
+            <invn_attr_e />
+            <invn_attr_f />
+            <invn_attr_g />
+            <work_order_nbr />
+            <work_order_seq_nbr>0</work_order_seq_nbr>
+            <screen_name>Active Inventory</screen_name>
+            <module_name>ActiveInventoryView</module_name>
+            <ref_code_6 />
+            <ref_value_6 />
+            <ref_code_7 />
+            <ref_value_7 />
+            <ref_code_8 />
+            <ref_value_8 />
+            <ref_code_9 />
+            <ref_value_9 />
+            <ref_code_10 />
+            <ref_value_10 />
+            <ref_code_11>PAS</ref_code_11>
+            <ref_value_11>Yes</ref_value_11>
+            <ref_code_12>CAS</ref_code_12>
+            <ref_value_12>Yes</ref_value_12>
+            <order_type />
+            <po_type />
+            <billing_location_type />
+            <create_ts>20220811160742</create_ts>
+            <invn_attr_h />
+            <invn_attr_i />
+            <invn_attr_j />
+            <invn_attr_k />
+            <invn_attr_l />
+            <invn_attr_m />
+            <invn_attr_n />
+            <invn_attr_o />
+            <ref_code_13 />
+            <ref_value_13 />
+            <ref_code_14 />
+            <ref_value_14 />
+            <ref_code_15 />
+            <ref_value_15 />
+            <ref_code_16 />
+            <ref_value_16 />
+            <ref_code_17 />
+            <ref_value_17 />
+            <ref_code_18 />
+            <ref_value_18 />
+            <ref_code_19 />
+            <ref_value_19 />
+            <ref_code_20 />
+            <ref_value_20 />
+            <to_location />
+            <prev_erp_bucket />
+            <current_erp_bucket />
+            <lock_code_priority />
+            <to_container_nbr />
+        </inventory_history>
+    </ListOfInventoryHistories>
+</LgfData>
