@@ -20,7 +20,7 @@ public class DataGenarator {
 	public static void main(String args[]) {
 		
 
-		System.out.println("Date:"+DataGenarator.getCurrentDate("MMddyyyyhhmmss"));
+		System.out.println("Date:"+DataGenarator.getCurrentDate("yyyy-MM-dd'T'hh:mm:ss"));
 		
 	}
 }

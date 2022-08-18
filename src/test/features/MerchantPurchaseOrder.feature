@@ -1,6 +1,6 @@
 Feature: MPO - API Automation feature
 
-  @TestCase1 @FT2039 @OCWMS @REGRESSION @MPO
+  @TestCase1 @FT2039 @FT-3871 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase1 : MPO - Generating a valid OAuth2 Token
     Given The API endpoint is "https://redft-pipe3-user-pool.auth.eu-west-1.amazoncognito.com/oauth2/token"
     And get secret "mpo.username" and "mpo.pssword"
@@ -8,7 +8,7 @@ Feature: MPO - API Automation feature
     Then validate response status code is "200"
     And User captures "access_token" from response as "mpo_token"
 
-  @TestCase2 @FT2039 @OCWMS @REGRESSION @MPO
+  @TestCase2 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase2 : MPO - API returns 200 for valid request
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
     And User includes "mpo_token" in request header
@@ -39,7 +39,7 @@ Feature: MPO - API Automation feature
     #And I validate "Ordered qty" is "10"
     #And I validate "Delivery Date" is "29/05/2023"
 
-  @TestCase3 @FT2039 @OCWMS @REGRESSION @MPO
+  @TestCase3 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase3 : MPO - API returns 200 for valid request
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
     And User includes "mpo_token" in request header
@@ -49,7 +49,7 @@ Feature: MPO - API Automation feature
     When user performs HTTP "PUT" request
     Then validate response status code is "200"
 
-  @TestCase4 @FT2039 @OCWMS @REGRESSION @MPO
+  @TestCase4 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase4 : MPO - API request without token to get 401 Unauthorized
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
     And User include header params "Content-Type" as "application/json"
@@ -58,7 +58,7 @@ Feature: MPO - API Automation feature
     When user performs HTTP "PUT" request
     Then validate response status code is "401"
 
-  @TestCase5 @FT2039 @OCWMS @REGRESSION @MPO
+  @TestCase5 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase5 : MPO - Verify status code 400 when supplierCode is more than 4 chars
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
     And User includes "mpo_token" in request header
@@ -76,3 +76,27 @@ Feature: MPO - API Automation feature
     #Then I perform database validations
       #| return_item_event_id | 8176315 |
       #| return_item_id       | 4995611 |
+
+  @TestCase6 @FT-3871 @lf-java-ocwms-po-sqs-consumer
+  Scenario: TestCase6 : MPO - Verify status code 200 and url-encode the payload
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    And User includes "mpo_token" in request header
+    And User include header params "Content-Type" as "application/json"
+    Then read payload from file "merchantPurchaseOrder"
+    Then User set "supplierCode" in request body with value "VERY"
+    And User set "sku" in request body with value "N7MAX&amp;"
+    Then User build request payload
+    When user performs HTTP "PUT" request
+    Then validate response status code is "200"
+
+  @TestCase6 @FT-3871 @lf-java-ocwms-po-sqs-consumer
+  Scenario: TestCase6 : MPO - Verify status code 200 and url-encode the payload
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    And User includes "mpo_token" in request header
+    And User include header params "Content-Type" as "application/json"
+    Then read payload from file "merchantPurchaseOrder"
+    Then User set "supplierCode" in request body with value "VERY"
+    And User set "sku" in request body with value "& Posh © éAcòrns @ ® æ"
+    Then User build request payload
+    When user performs HTTP "PUT" request
+    Then validate response status code is "200"

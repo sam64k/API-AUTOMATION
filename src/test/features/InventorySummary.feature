@@ -13,7 +13,7 @@ Feature: Inventory Summary - API Automation feature
     Then user performs HTTP "POST" request on InventorySummey API
     Then validate response status code is "200"
 
-  @TestCase11 @InventorySummary @REGRESSION
+  @TestCase11 @InventorySummary
   Scenario: TestCase002 - InventorySummary Test response code is 403 for invalid credentials
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/ivs/v1/pipe3/inventory"
     And User include header params "Content-Type" as "application/xml"
@@ -25,3 +25,16 @@ Feature: Inventory Summary - API Automation feature
     And User build request payload
     Then user performs HTTP "POST" request on InventorySummey API
     Then validate response status code is "403"
+
+  @TestCase12 @InventorySummary @FT-3871
+  Scenario: TestCase003 - Update InventorySummary api to url-encode the payload
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/ivs/v1/pipe3/inventory"
+    And User include header params "Content-Type" as "application/xml"
+    And get secret "InventorySummary.user" and "InventorySummary.password"
+    Then read payload from file "InventorySummary"
+    And User set "facility_code" in request body with value "003"
+    And User set "item_alternate_code" in request body with value "TEMP"
+    And User set "item_part_a" in request body with value "TEMP &amp;"
+    And User build request payload
+    Then user performs HTTP "POST" request on InventorySummey API
+    Then validate response status code is "200"

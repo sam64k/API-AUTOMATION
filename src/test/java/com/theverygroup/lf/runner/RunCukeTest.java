@@ -12,7 +12,7 @@ import io.cucumber.junit.Cucumber;
 		features = {"src/test/features"},
 		monochrome = true,
 		dryRun = false,
-		tags = "@IHT",
+		tags = "@FT-3871",
 		glue = "com.theverygroup.lf",
 		plugin = { "pretty","html:target/Execution-Report.html",
 					"json:target/Execution-Report.json"	}

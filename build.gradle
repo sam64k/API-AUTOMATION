@@ -57,6 +57,17 @@ dependencies {
     testImplementation group: 'org.testng', name: 'testng', version: '6.9.8'
 }
 
+//task cucumber1() {
+//    dependsOn assemble, testClasses
+//    doLast {
+//        javaexec {
+//            main = "io.cucumber.core.cli.Main"
+//            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+//            args = ['--plugin', 'pretty','--tags', "${tags}",'--glue', 'com.theverygroup.lf', 'src/test/features']
+//        }
+//    }
+//}
+
 test {
     useJUnitPlatform()
 }

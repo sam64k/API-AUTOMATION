@@ -5,7 +5,7 @@
         <ClientEnvCode>theverygroup_test</ClientEnvCode>
         <ParentCompanyCode>*</ParentCompanyCode>
         <Entity>inventory_history</Entity>
-        <TimeStamp>2022-08-11T16:07:44</TimeStamp>
+        <TimeStamp>${TimeStamp:-2022-08-11T16:07:44}</TimeStamp>
     </Header>
     <ListOfInventoryHistories>
         <inventory_history>

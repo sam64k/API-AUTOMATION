@@ -1,5 +1,6 @@
 package com.theverygroup.lf.steps;
 
+import com.theverygroup.lf.utility.DataGenarator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -50,6 +51,11 @@ public class HTTPRequestBuilder extends ScenarioContext {
 	public void user_set_in_request_body_with_value(String key, String value) {
 	    // Write code here that turns the phrase above into concrete actions
 	    scenarioContext.addPayloadParams(key, value);
+	}
+	@Then("set current {string} {string}")
+	public void set_current(String key, String currentTimeStampFormat) {
+		// Write code here that turns the phrase above into concrete actions
+		scenarioContext.addPayloadParams(key, DataGenarator.getCurrentDate(currentTimeStampFormat));
 	}
 	@Then("I generate a valid contractNumber sarting with {string}")
 	public void i_generate_a_valid_contract_number_sarting_with(String startsWith) {

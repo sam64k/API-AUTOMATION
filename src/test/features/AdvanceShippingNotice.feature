@@ -1,6 +1,6 @@
 Feature: ASN - API Automation feature
 
-  @TestCase6 @FT2048 @OCWMS @REGRESSION @ASN
+  @TestCase6 @FT2048 @FT-3871
   Scenario: TestCase6 : ASN -  Generating a valid OAuth2 Token
     Given The API endpoint is "https://redft-pipe3-user-pool.auth.eu-west-1.amazoncognito.com/oauth2/token"
     And get secret "asn.username" and "asn.password"
@@ -61,3 +61,37 @@ Feature: ASN - API Automation feature
     #Then capture screen
     #And I validate "Shipped Qty" is "5"
     #And I close browser session
+
+  @TestCase10 @FT-3871
+  Scenario: TestCase10 : ASN - Update ASN api to url-encode the payload
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/asn/v1/pipe3/advanced-shipment-notice"
+    And User includes "asn_token" in request header
+    And User include header params "Content-Type" as "application/json"
+    Then read payload from file "AdvanceShippingNotice"
+    And User set "bookingReference" in request body with value "03056102"
+    And User set "supplierCode" in request body with value "A054"
+    And User set "facility_code" in request body with value "3"
+    And User set "typeCode" in request body with value "DEL"
+    And User set "deliveryDate" in request body with value "2022-09-29"
+    And User set "quantity" in request body with value "6"
+    And User set "sku" in request body with value "N7MAX &amp;"
+    Then User build request payload
+    When user performs HTTP "PUT" request
+    Then validate response status code is "200"
+
+  @TestCase11 @FT-3871
+  Scenario: TestCase11 : ASN - Update ASN api to url-encode the payload
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/asn/v1/pipe3/advanced-shipment-notice"
+    And User includes "asn_token" in request header
+    And User include header params "Content-Type" as "application/json"
+    Then read payload from file "AdvanceShippingNotice"
+    And User set "bookingReference" in request body with value "03056102"
+    And User set "supplierCode" in request body with value "A054"
+    And User set "facility_code" in request body with value "3"
+    And User set "typeCode" in request body with value "DEL"
+    And User set "deliveryDate" in request body with value "2022-09-29"
+    And User set "quantity" in request body with value "6"
+    And User set "sku" in request body with value "Beckham & Posh ©@ ® æ"
+    Then User build request payload
+    When user performs HTTP "PUT" request
+    Then validate response status code is "200"
