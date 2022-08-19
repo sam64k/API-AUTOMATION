@@ -24,36 +24,20 @@ repositories {
 
 
 dependencies {
-    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-   // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
-    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.0'
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.3.4'
-    // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.3.4'
-    // https://mvnrepository.com/artifact/io.cucumber/cucumber-core
-    implementation 'io.cucumber:cucumber-core:7.3.4'
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    implementation 'io.cucumber:cucumber-core:7.5.0'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
-    // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
-    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.0.0'
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
-    // https://mvnrepository.com/artifact/com.google.inject/guice
     implementation group: 'com.google.inject', name: 'guice', version: '4.1.0'
-    // https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer
     testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '7.3.4'
-// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.1.3'
-// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.1.3'
-// https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.1.1'
-// https://mvnrepository.com/artifact/com.google.guava/guava
     implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
-// https://mvnrepository.com/artifact/org.testng/testng
     testImplementation group: 'org.testng', name: 'testng', version: '6.9.8'
 }
 
@@ -72,6 +56,27 @@ test {
     useJUnitPlatform()
 }
 apply from: 'gradle/dependency-check.gradle'
-//apply from: 'gradle/utils.gradle'
 apply from: 'gradle/dependency-updates.gradle'
 apply from: 'gradle/publish.gradle'
+
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumberCli() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:target/cucumber-report.html',
+                    '--glue', 'com.theverygroup.lf',
+                    'src/test/resources/features']
+        }
+    }
+}
