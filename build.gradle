@@ -40,32 +40,30 @@ dependencies {
     implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
     testImplementation group: 'org.testng', name: 'testng', version: '6.9.8'
 }
-
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+task cucumberCLI() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty',
+                    '--plugin','html:target/Execution-Report.html',
+                    '--plugin','json:target/Execution-Report.json',
+                    '--tags', "${tags}",
+                    '--glue', 'com.theverygroup.lf', 'src/test/features']
+        }
+    }
+}
+//plugin = { "pretty","html:target/Execution-Report.html",
+//    "json:target/Execution-Report.json"	}
 test {
     useJUnitPlatform()
 }
 apply from: 'gradle/dependency-check.gradle'
 apply from: 'gradle/dependency-updates.gradle'
 apply from: 'gradle/publish.gradle'
-
-
-configurations {
-    cucumberRuntime {
-        extendsFrom testImplementation
-    }
-}
-
-task cucumberCli() {
-    dependsOn assemble, testClasses
-    doLast {
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = [
-                    '--plugin', 'pretty',
-                    '--plugin', 'html:target/cucumber-report.html',
-                    '--glue', 'com.theverygroup.lf',
-                    'src/test/resources/features']
-        }
-    }
-}

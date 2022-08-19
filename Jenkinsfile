@@ -11,3 +11,8 @@ librarySimpleQuarkusPipeline(
 	team: ['lf'],
 	majorVersion: '0'
 )
+// javaPipeLineTest(
+//     repositoryName: 'lf-api-cuke-test',
+//     team: ['lf'],
+//     majorVersion: '0'
+// )
