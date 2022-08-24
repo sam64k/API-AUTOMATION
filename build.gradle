@@ -8,6 +8,7 @@ buildscript {
 plugins {
     id 'java'
     id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 group 'com.theverygroup.fulfilment'
@@ -20,25 +21,26 @@ repositories {
             password repoPassword
         }
     }
+    mavenCentral()
 }
 
 
 dependencies {
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.0'
-    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.3.4'
-    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.3.4'
-    implementation 'io.cucumber:cucumber-core:7.5.0'
-    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.0.0'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
-    implementation group: 'com.google.inject', name: 'guice', version: '4.1.0'
-    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '7.3.4'
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.1.3'
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.1.3'
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.1.1'
-    implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
-    testImplementation group: 'org.testng', name: 'testng', version: '6.9.8'
+    implementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    implementation "io.cucumber:cucumber-core:${cucumberVersion}"
+    implementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+    implementation "io.cucumber:cucumber-picocontainer:${cucumberVersion}"
+    implementation 'org.junit.vintage:junit-vintage-engine:5.9.0'
+    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.postgresql:postgresql:42.4.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    implementation 'com.google.inject:guice:5.1.0'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.4.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.2.3'
+    implementation 'org.testng:testng:7.6.1'
+    implementation 'io.rest-assured:rest-assured:4.4.0'
 }
 configurations {
     cucumberRuntime {
@@ -55,12 +57,10 @@ task cucumberCLI() {
                     '--plugin','html:target/Execution-Report.html',
                     '--plugin','json:target/Execution-Report.json',
                     '--tags', "${tags}",
-                    '--glue', 'com.theverygroup.lf', 'src/test/features']
+                    '--glue', 'com.theverygroup.lf', 'src/test/resources/features']
         }
     }
 }
-//plugin = { "pretty","html:target/Execution-Report.html",
-//    "json:target/Execution-Report.json"	}
 test {
     useJUnitPlatform()
 }

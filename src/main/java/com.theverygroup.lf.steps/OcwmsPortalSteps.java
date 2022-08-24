@@ -16,10 +16,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 
-public class ocwmsPortalSteps {
+public class OcwmsPortalSteps {
 	
 	public ScenarioContext scenarioContext;
-	public ocwmsPortalSteps(ScenarioContext scenarioContext) {
+	public OcwmsPortalSteps(ScenarioContext scenarioContext) {
 		this.scenarioContext = scenarioContext;
 	}
 
