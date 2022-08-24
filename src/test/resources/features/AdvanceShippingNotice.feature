@@ -1,6 +1,6 @@
 Feature: ASN - API Automation feature
 
-  @TestCase6 @FT2048 @FT-3871
+  @TestCase6 @FT2048 @FT-3871 @REGRESSION
   Scenario: TestCase6 : ASN -  Generating a valid OAuth2 Token
     Given The API endpoint is "https://redft-pipe3-user-pool.auth.eu-west-1.amazoncognito.com/oauth2/token"
     And get secret "asn.username" and "asn.password"

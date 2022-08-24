@@ -23,7 +23,10 @@ repositories {
     }
     mavenCentral()
 }
-
+//java {
+//    sourceCompatibility = JavaVersion.VERSION_11
+//    targetCompatibility = JavaVersion.VERSION_11
+//}
 
 dependencies {
     implementation "io.cucumber:cucumber-java:${cucumberVersion}"
@@ -39,7 +42,6 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
     implementation 'io.github.bonigarcia:webdrivermanager:5.2.3'
-    implementation 'org.testng:testng:7.6.1'
     implementation 'io.rest-assured:rest-assured:4.4.0'
 }
 configurations {
