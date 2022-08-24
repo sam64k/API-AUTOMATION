@@ -1,6 +1,5 @@
 package com.theverygroup.lf.hooks;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
