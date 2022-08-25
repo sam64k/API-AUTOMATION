@@ -6,9 +6,8 @@ script {
     library identifier: "jenkins-pipeline-library${branchName}"
 }
 
-librarySimplePipeline(
+librarySimpleQuarkusPipeline(
         repositoryName: 'lf-api-cuke-test',
         team: ['lf'],
-        majorVersion: '0',
-        buildFatJar: true
+        majorVersion: '0'
 )

@@ -23,10 +23,11 @@ repositories {
     }
     mavenCentral()
 }
-//java {
-//    sourceCompatibility = JavaVersion.VERSION_11
-//    targetCompatibility = JavaVersion.VERSION_11
-//}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 dependencies {
     implementation "io.cucumber:cucumber-java:${cucumberVersion}"
@@ -47,6 +48,10 @@ configurations {
         extendsFrom testImplementation
     }
 }
+
+def cukeTags = project.properties['tags'] ?: ""
+
+
 task cucumberCLI() {
     dependsOn assemble, testClasses
     doLast {
@@ -54,9 +59,9 @@ task cucumberCLI() {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = ['--plugin', 'pretty',
-                    '--plugin','html:target/Execution-Report.html',
-                    '--plugin','json:target/Execution-Report.json',
-                    '--tags', "${tags}",
+                    '--plugin', 'html:target/Execution-Report.html',
+                    '--plugin', 'json:target/Execution-Report.json',
+                    '--tags', "${cukeTags}",
                     '--glue', 'com.theverygroup.lf', 'src/test/resources/features']
         }
     }
