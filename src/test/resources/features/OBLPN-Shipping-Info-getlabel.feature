@@ -1,6 +1,6 @@
 Feature: OBLPN Shipping Info (Get Label)
 
-  @get-label @FT-2782
+  @get-label @FT-2782 @lf-api-cuke-test
   Scenario: OBLPN Shipping Info Get Label returns 200 success
     Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/osi/v1/pipe3/oblpn-get-label"
     And get secret "OBLPNGetlabel.user" and "OBLPNGetlabel.password"
