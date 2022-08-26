@@ -50,6 +50,7 @@ configurations {
 }
 
 def cukeTags = project.properties['tags'] ?: ""
+def testEnv = project.properties['env'] ?: ""
 
 
 task cucumberCLI() {
@@ -63,9 +64,11 @@ task cucumberCLI() {
                     '--plugin', 'json:target/Execution-Report.json',
                     '--tags', "${cukeTags}",
                     '--glue', 'com.theverygroup.lf', 'src/test/resources/features']
+            environment['TEST_ENV'] = "${testEnv}"
         }
     }
 }
+
 test {
     useJUnitPlatform()
 }
