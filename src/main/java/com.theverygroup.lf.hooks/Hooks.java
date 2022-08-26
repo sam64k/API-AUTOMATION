@@ -1,8 +1,10 @@
 package com.theverygroup.lf.hooks;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Properties;
 
+import com.theverygroup.lf.steps.GlobalContext;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import com.theverygroup.lf.browsersession.ChromeBrowser;
@@ -39,6 +41,14 @@ public class Hooks {
 		FileOutputStream fos2 = new FileOutputStream("properties.decrypt");
 		EncryptDecrypt.decrypt(key, fis2, fos2);
 		EncryptDecrypt.readproperties("properties.decrypt");
+	}
+	@BeforeAll(order=2)
+	public static void readEnvironmentEndpoint() throws IOException {
+		//readEnvironmentEndpoint()
+		InputStream input = Hooks.class.getClassLoader().getResourceAsStream("env.properties");
+		Properties prop = new Properties();
+		prop.load(input);
+		GlobalContext.setEnvironmentURI(prop);
 	}
 	@After
 	public static void closeChromeSessionWhenTestFail(Scenario scenario) {

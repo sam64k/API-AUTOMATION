@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.io.IOException;
@@ -115,8 +116,19 @@ public class HTTPRequestBuilder extends ScenarioContext {
 	}
 	@Then("The API endpoint is {string}")
 	public void the_api_endpoint_is(String URI) {
-	    // Write code here that turns the phrase above into concrete actions
-		scenarioContext.setURI(URI);
+		//"${env}.mpo.usr"
+		String env ="test";
+		if(URI.startsWith("${env}")){
+			URI = StringUtils.replaceIgnoreCase(URI,"${env}",GlobalContext.getEnv());
+			scenarioContext.setURI(GlobalContext.getEnvironmentURI(URI));
+		}
+		else if (URI.contains("${env}")) {
+			URI = StringUtils.replaceIgnoreCase(URI,"${env}",GlobalContext.getEnv());
+			scenarioContext.setURI(URI);
+		}
+		else {
+			scenarioContext.setURI(URI);
+		}
 	}
 	@When("user performs HTTP {string} request")
 	public void user_performs_http_request(String httpOperation) {
@@ -168,10 +180,12 @@ public class HTTPRequestBuilder extends ScenarioContext {
 			GlobalContext.addToGlobalDataContext(key,scenarioContext.getPayloadParams(key));
 	}
 	@Given("get secret {string} and {string}")
-	public void get_secret_and(String user, String pws) {
+	public void get_secret_and(String user, String pwd) {
 	    // Write code here that turns the phrase above into concrete actions
+		user = StringUtils.replaceIgnoreCase(user,"${env}",GlobalContext.getEnv());
+		pwd = StringUtils.replaceIgnoreCase(pwd,"${env}",GlobalContext.getEnv());
 		scenarioContext.setUsername(GlobalContext.getCredentials(user));
-		scenarioContext.setPassword(GlobalContext.getCredentials(pws));
+		scenarioContext.setPassword(GlobalContext.getCredentials(pwd));
 	}
 	@When("User generates a valid OAuth2 cognito token")
 	public void user_generates_a_valid_o_auth2_cognito_token() {
