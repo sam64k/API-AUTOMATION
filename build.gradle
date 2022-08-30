@@ -51,6 +51,7 @@ configurations {
 
 def cukeTags = project.properties['tags'] ?: ""
 def testEnv = project.properties['env'] ?: ""
+def secretKey = project.properties['key'] ?: ""
 
 
 task cucumberCLI() {
