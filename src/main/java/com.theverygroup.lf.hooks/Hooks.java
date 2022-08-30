@@ -1,22 +1,22 @@
 package com.theverygroup.lf.hooks;
 
-import java.io.*;
-import java.util.Properties;
-
-import com.theverygroup.lf.steps.GlobalContext;
-import net.bytebuddy.agent.builder.AgentBuilder;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
 import com.theverygroup.lf.browsersession.ChromeBrowser;
+import com.theverygroup.lf.steps.GlobalContext;
 import com.theverygroup.lf.steps.ScenarioContext;
 import com.theverygroup.lf.utility.EncryptDecrypt;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 import io.restassured.http.Headers;
 import io.restassured.response.ResponseBody;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Hooks {
 	public ScenarioContext scenarioContext;
@@ -32,9 +32,9 @@ public class Hooks {
 	public static void readPropertiesFile() throws Throwable {
 		System.out.println("Before All Hook ## Read Property File");
 //		GlobalContext.setProperties("src\\main\\resources\\configuration.xml");
-		String key ="udelsaWKSswwOOQ!@Awdnj#";
-		String KEY = System.getenv("KEY");
-		System.out.println("key:::::"+KEY);
+		//String key ="udelsaWKSswwOOQ!@Awdnj#";
+		String key = System.getenv("SECRET_KEY");
+		System.out.println("key:::::"+key);
 
 		InputStream fis2 = Hooks.class.getClassLoader().getResourceAsStream("properties.encrypt");
 

@@ -65,6 +65,7 @@ task cucumberCLI() {
                     '--tags', "${cukeTags}",
                     '--glue', 'com.theverygroup.lf', 'src/test/resources/features']
             environment['TEST_ENV'] = "${testEnv}"
+            environment['SECRET_KEY'] = "${secretKey}"
         }
     }
 }
