@@ -45,10 +45,13 @@ public class Hooks {
     @BeforeAll(order = 2)
     public static void readEnvironmentEndpoint() throws IOException {
         //readEnvironmentEndpoint()
-        InputStream input = Hooks.class.getClassLoader().getResourceAsStream("env.properties");
-        Properties prop = new Properties();
-        prop.load(input);
-        GlobalContext.setEnvironmentURI(prop);
+        try (InputStream input = Hooks.class.getClassLoader().getResourceAsStream("env.properties");) {
+            Properties prop = new Properties();
+            prop.load(input);
+            GlobalContext.setEnvironmentURI(prop);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @After
