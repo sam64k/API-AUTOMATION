@@ -33,7 +33,7 @@ public class Hooks {
 		System.out.println("Before All Hook ## Read Property File");
 //		GlobalContext.setProperties("src\\main\\resources\\configuration.xml");
 		//String key ="udelsaWKSswwOOQ!@Awdnj#";
-		String KEY = System.getenv("KEY");
+		String KEY = System.getenv("SECRET_KEY");
 		System.out.println("key:::::"+KEY);
 
 		InputStream fis2 = Hooks.class.getClassLoader().getResourceAsStream("properties.encrypt");
