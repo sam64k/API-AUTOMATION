@@ -84,7 +84,6 @@ public class EncryptDecrypt {
 		}
 	}
 	public static void main(String args[]) throws Throwable {
-//		String key ="udelsaWKSswwOOQ!@Awdnj#";
 //		FileInputStream fis = new FileInputStream("target\\properties");
 //		FileOutputStream fos = new FileOutputStream("src\\main\\resources\\properties.encrypt");
 //		encrypt(key, fis, fos);
