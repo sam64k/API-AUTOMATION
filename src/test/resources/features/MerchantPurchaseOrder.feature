@@ -2,15 +2,15 @@ Feature: MPO - API Automation feature
 
   @TestCase1 @FT2039 @FT-3871 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase1 : MPO - Generating a valid OAuth2 Token
-    Given The API endpoint is "https://redft-pipe3-user-pool.auth.eu-west-1.amazoncognito.com/oauth2/token"
-    And get secret "mpo.username" and "mpo.pssword"
+    Given The API endpoint is "${env}.mpo.uri"
+    And get secret "${env}.mpo.usr" and "${env}.mpo.pwd"
     When User generates a valid OAuth2 cognito token
     Then validate response status code is "200"
     And User captures "access_token" from response as "mpo_token"
 
   @TestCase2 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase2 : MPO - API returns 200 for valid request
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User includes "mpo_token" in request header
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"
@@ -41,7 +41,7 @@ Feature: MPO - API Automation feature
 
   @TestCase3 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase3 : MPO - API returns 200 for valid request
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User includes "mpo_token" in request header
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"
@@ -51,7 +51,7 @@ Feature: MPO - API Automation feature
 
   @TestCase4 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase4 : MPO - API request without token to get 401 Unauthorized
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"
     Then User build request payload
@@ -60,7 +60,7 @@ Feature: MPO - API Automation feature
 
   @TestCase5 @FT2039 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase5 : MPO - Verify status code 400 when supplierCode is more than 4 chars
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User includes "mpo_token" in request header
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"
@@ -79,7 +79,7 @@ Feature: MPO - API Automation feature
 
   @TestCase6 @FT-3871 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase6 : MPO - Verify status code 200 and url-encode the payload
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User includes "mpo_token" in request header
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"
@@ -91,7 +91,7 @@ Feature: MPO - API Automation feature
 
   @TestCase6 @FT-3871 @lf-java-ocwms-po-sqs-consumer
   Scenario: TestCase6 : MPO - Verify status code 200 and url-encode the payload
-    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/pipe3/merchandise-purchase-order"
+    Given The API endpoint is "https://nonprd-api.landf.theverygroup.com/fsl/mpo/v1/${env}/merchandise-purchase-order"
     And User includes "mpo_token" in request header
     And User include header params "Content-Type" as "application/json"
     Then read payload from file "merchantPurchaseOrder"

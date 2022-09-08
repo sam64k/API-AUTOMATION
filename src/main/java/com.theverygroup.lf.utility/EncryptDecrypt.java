@@ -1,5 +1,13 @@
 package com.theverygroup.lf.utility;
 
+import com.theverygroup.lf.steps.GlobalContext;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,15 +16,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map.Entry;
 import java.util.Properties;
-
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
-
-import com.theverygroup.lf.steps.GlobalContext;
 
 public class EncryptDecrypt {
 	public static void encrypt(String key, InputStream is, OutputStream os) throws Throwable {
@@ -85,7 +84,6 @@ public class EncryptDecrypt {
 		}
 	}
 	public static void main(String args[]) throws Throwable {
-//		String key ="udelsaWKSswwOOQ!@Awdnj#";
 //		FileInputStream fis = new FileInputStream("target\\properties");
 //		FileOutputStream fos = new FileOutputStream("src\\main\\resources\\properties.encrypt");
 //		encrypt(key, fis, fos);

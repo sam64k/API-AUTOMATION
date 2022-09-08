@@ -50,7 +50,8 @@ configurations {
 }
 
 def cukeTags = project.properties['tags'] ?: ""
-def testEnv = project.properties['env'] ?: ""
+def testEnv = project.properties['environment'] ?: ""
+def testSecretKey = project.properties['secretKey'] ?: ""
 
 
 task cucumberCLI() {
@@ -65,6 +66,7 @@ task cucumberCLI() {
                     '--tags', "${cukeTags}",
                     '--glue', 'com.theverygroup.lf', 'src/test/resources/features']
             environment['TEST_ENV'] = "${testEnv}"
+            environment['SECRET_KEY'] = "${testSecretKey}"
         }
     }
 }
